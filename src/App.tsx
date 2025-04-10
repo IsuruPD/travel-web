@@ -12,8 +12,8 @@ const App: React.FC = () => {
       <Header />
       <HeroSection />
       <IntroSection />
-      {/* <ExperienceSection />
-      <MemorableSection /> */}
+      <ExperienceSection />
+      <MemorableSection />
     </main>
   )
 }

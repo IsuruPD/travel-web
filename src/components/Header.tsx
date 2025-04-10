@@ -1,68 +1,48 @@
-"use client";
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@heroui/react";
-import "./designModule.css";
 
 const Header: React.FC = () => {
   return (
-    <header className="header">
-      <Navbar>
-      <NavbarBrand>
-        <AcmeLogo />
-        <p className="font-bold text-inherit">ACME</p>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
-      {/* <div className="headerContent">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
-        
-        <nav className="navLinks">
-          <a href="#experience" className="navLink">
-            EXPERIENCE
-          </a>
-          <a href="#explore" className="navLink">
-            EXPLORE
-          </a>
-          <a href="#discover" className="navLink">
-            DISCOVER
-          </a>
-        </nav>
+      <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.25em] p-4 w-full bg-white/30 backdrop-blur-sm">
+        <NavbarContent className="hidden sm:flex" justify="start">
+          <NavbarItem>
+            <span className="material-symbols-rounded">home</span>
+          </NavbarItem>
 
-        <h1 className="brandName ">DSP Hotel</h1>
+          <NavbarItem>
+            <Link color="foreground" href="#">
+              Experience
+            </Link>
+          </NavbarItem>
 
-        <p className="navLink">START MY SAFARI</p>
+          <NavbarItem isActive>
+            <Link aria-current="page" href="#">
+              Explore
+            </Link>
+          </NavbarItem>
+          
+        </NavbarContent>
 
-        <button className="enquireButton">Enquire Now</button>
-      </div>
+        <NavbarContent className="flex justify-center w-full" justify="center">
+          <NavbarBrand>
+            <p className="font-bold text-inherit text-center w-full">DSP Hotel</p>
+          </NavbarBrand>
+        </NavbarContent>
 
-      <p className="familyOwned">FAMILY OWNED&RUN SINCE 2025</p> */}
-    </header>
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Link color="foreground" href="#">
+              Start Safari
+            </Link>
+          </NavbarItem>
+
+          <NavbarItem>
+            <Button as={Link} color="primary" href="#" variant="flat">
+              Enquire Now
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
   );
 };
 

@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Akronim&display=swap');
+@import "tailwindcss";
 
 .akronim-regular {
   font-family: "Akronim", system-ui;
   font-weight: 400;
   font-style: normal;
 }
+
