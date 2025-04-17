@@ -1,16 +1,19 @@
 import React from "react";
-import styles from "./Input.Design.module.css";
+import "./ComponentStyles.css"
 
-const HeroSection: React.FC = () => {
+const LandingBanner: React.FC = () => {
   return (
-    <section className={styles.heroSection}>
-      <img src="landing.jpg" alt="Safari landscape" className={styles.heroImage} />
-      <div className={styles.heroText}>
-        <span className={styles.LandingTitle}>Escape</span>
-        <div>to our world</div>
+    <section className="landingSection">
+      <div style={{ position: "relative" }}>
+        <img src="landing.jpg" alt="Safari landscape" className="landingImage"/>
+        <img  src="clawMark.png" alt="Claw mark" className="clawMarkImage"/>
+      </div>
+      <div className="landingText" style={{ textAlign: "center" }}>
+        <div className="landingTitle">Escape</div>
+        <div className="landingSubTitle">to our world</div>
       </div>
     </section>
   );
 };
 
-export default HeroSection;
+export default LandingBanner;
