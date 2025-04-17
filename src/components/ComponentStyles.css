@@ -102,13 +102,21 @@
 }
 
 .landingSubTitle{
-  color: #ffffff;
-  /* font-family: "Archivo", sans-serif; */
-  font-weight: 400;
+  color: #3c580a;
+  font-weight: 700;
   font-style: normal;
-  font-size: 4rem;
+  font-size: 5rem;
   padding-left: 300px;
   margin: 0;
+}
+
+.landingSubTitleSec{
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  color: #0a0901;
+  font-weight: 500;
 }
 
 .landingText {
@@ -151,5 +159,92 @@
     text-align: left;
     font-size: 1em;
     padding: 0;
+  }
+}
+
+/* ////////////// */
+
+.introSection {
+  height: 90vh;
+  text-align: center;
+  padding: 100px 0;
+  position: relative;
+}
+
+@media (width<=1024px) {
+  .introSection {
+    padding: 50px 20px;
+  }
+}
+
+.introDesc{
+  z-index: 100;
+}
+  
+.lodgeImage {
+  width: 600px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+@media (width<=1024px) {
+  .lodgeImage {
+    margin-top: 30px;
+    position: relative;
+  }
+}
+
+
+.introHeading {
+  color: #3b4e3f;
+  margin-bottom: 30px;
+  font-size: 4em;
+  line-height: 70px;
+}
+
+@media (width<=640px) {
+  .introHeading {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
+.hotelName{
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.introSubheading {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #9a895b;
+  margin-bottom: 10px;
+  font-size: 3em;
+  line-height: 70px;
+}
+
+@media (width<=640px) {
+  .introSubheading {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
+
+.introSubheadingSecond {
+  color: #be9954;
+  font-family: Archivo, sans-serif;
+  font-size: 4em;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@media (width<=640px) {
+  .introSubheadingSecond {
+    font-size: 24px;
+    line-height: 1.4;
   }
 }

@@ -1,4 +1,4 @@
-.container {
+/* .container {
     background-color: #fff;
     width: 100%;
     margin: 0 auto;
@@ -57,7 +57,7 @@
     font-size: 14px;
   }
   
-  /* .brandName {
+  ///.brandName {
     color: #53594b;
     font-family: Archivo, sans-serif;
     font-size: 35px;
@@ -68,7 +68,7 @@
     .brandName {
       font-size: 24px;
     }
-  } */
+  } ////
   
   .safariText {
     color: #747b75;
@@ -97,80 +97,15 @@
     margin-top: 10px;
     font-family: Inter, sans-serif;
     font-size: 13px;
-  }
+  } */
  
-  .introSection {
-    text-align: center;
-    padding: 100px 0;
-    position: relative;
-  }
-  
-  @media (width<=991px) {
-    .introSection {
-      padding: 50px 20px;
-    }
-  }
+
   
   .safariIcon {
     width: 175px;
     margin: 0 auto 50px;
   }
   
-  .introHeading {
-    color: #3b4e3f;
-    margin-bottom: 30px;
-    font-family: Archivo, sans-serif;
-    font-size: 36px;
-    line-height: 50px;
-  }
-  
-  @media (width<=640px) {
-    .introHeading {
-      font-size: 24px;
-      line-height: 1.4;
-    }
-  }
-  
-  .introSubheading {
-    color: #9a895b;
-    margin-bottom: 10px;
-    font-family: Archivo, sans-serif;
-    font-size: 37px;
-  }
-  
-  @media (width<=640px) {
-    .introSubheading {
-      font-size: 24px;
-      line-height: 1.4;
-    }
-  }
-  
-  .introSubheadingSecond {
-    color: #be9954;
-    font-family: Archivo, sans-serif;
-    font-size: 37px;
-  }
-  
-  @media (width<=640px) {
-    .introSubheadingSecond {
-      font-size: 24px;
-      line-height: 1.4;
-    }
-  }
-  
-  .lodgeImage {
-    width: 312px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-  
-  @media (width<=991px) {
-    .lodgeImage {
-      margin-top: 30px;
-      position: relative;
-    }
-  }
   
   .experienceSection {
     height: 613px;
