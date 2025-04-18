@@ -163,39 +163,63 @@
 }
 
 /* ////////////// */
-
 .introSection {
-  height: 90vh;
+  height: 100vh;
   text-align: center;
-  padding: 100px 0;
+  padding: 150px 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (width<=1024px) {
+@media (max-width: 768px) {
   .introSection {
-    padding: 50px 20px;
+    height: auto;
   }
 }
 
-.introDesc{
-  z-index: 100;
+.introDesc {
+  z-index: 10;
+  max-width: 800px;
 }
-  
+
 .lodgeImage {
   width: 600px;
+  opacity: 80%;
   position: absolute;
   bottom: 0;
   right: 0;
   z-index: 1;
 }
 
-@media (width<=1024px) {
+@media (max-width: 1024px) {
+  .introSection {
+    padding: 50px 20px;
+  }
+
   .lodgeImage {
-    margin-top: 30px;
     position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    display: block;
+    opacity: 1;
+  }
+
+  .introDesc {
+    margin-bottom: 40px;
   }
 }
 
+
+
+@media (max-width: 768px) {
+  .lodgeImage {
+    width: 90%;
+    align-self: center;
+  }
+}
 
 .introHeading {
   color: #3b4e3f;
@@ -204,16 +228,11 @@
   line-height: 70px;
 }
 
-@media (width<=640px) {
+@media (max-width: 640px) {
   .introHeading {
     font-size: 24px;
     line-height: 1.4;
   }
-}
-.hotelName{
-  font-family: "Poetsen One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .introSubheading {
@@ -226,7 +245,7 @@
   line-height: 70px;
 }
 
-@media (width<=640px) {
+@media (max-width: 640px) {
   .introSubheading {
     font-size: 24px;
     line-height: 1.4;
@@ -235,16 +254,16 @@
 
 .introSubheadingSecond {
   color: #be9954;
-  font-family: Archivo, sans-serif;
-  font-size: 4em;
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
   font-style: normal;
+  font-size: 4em;
 }
 
-@media (width<=640px) {
+@media (max-width: 640px) {
   .introSubheadingSecond {
     font-size: 24px;
     line-height: 1.4;
   }
 }
+
