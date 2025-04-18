@@ -200,7 +200,7 @@
 
 @media (max-width: 1024px) {
   .introSection {
-    padding: 50px 20px;
+    height: auto;
   }
 
   .lodgeImage {
@@ -209,7 +209,6 @@
     max-width: 400px;
     margin: auto;
     display: block;
-    opacity: 1;
   }
 
   .introDesc {
@@ -274,50 +273,98 @@
 
 /* ///////////// */
 
-.experienceSection,
-.experienceTextContainer,
-.experienceImage{
-  height: 75vh;
+.experienceSection {
+  display: flex;
+  min-height: 75vh;
+}
+
+@media (max-width: 1024px) {
+  .experienceSection {
+    flex-direction: column;
+  }
+
+    .experienceTextSec {
+    height: auto;
+  }
+
+  .experienceTextContainer {
+    padding: 2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .experienceSection {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .experienceImage {
+    height: auto;
+  }
+
+  .experienceTextSec {
+    height: auto;
+  }
+
+  .experienceTextContainer {
+    padding: 2em;
+  }
+}
+
+
+.experienceImage {
+  width: 100%;
+  height: 100%;
+}
+
+.experienceTextSec {
+  display: flex;
+  background-color: #435447;
+
 }
 
 .experienceTextContainer{
-  padding-top: 10em;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-bottom: 2em;
-  background-color: #435447;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  padding: 3em;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
-.subSectionTitle{
-  color: #fff;
-  /* font-family: "Poetsen One", sans-serif; */
-  font-weight: 800;
-  font-style: normal;
-  font-size: 4em;
+@media (max-width: 768px) {
+  .experienceTextContainer {
+    padding: 3em 1.5em;
+  }
+}
+
+.subSectionTitle {
   color: #172401;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 4em);
 }
 
-.subSectionDescription{
+.subSectionDescription {
   font-family: "Poetsen One", sans-serif;
   color: #fff;
   font-weight: 100;
-  font-style: normal;
-  font-size: 2.6em;
-  line-height: 1.8;
+  font-size: clamp(1rem, 2.5vw, 3em);
+  line-height: 1.6;
   text-align: left;
 }
 
-.subSectionDescriptionEmp{
+.subSectionDescriptionEmp {
   font-size: 1.2em;
   font-weight: 400;
   color: #be9954;
 }
 
-/* runningButton Exp Sec*/
-
+/* Button styling (unchanged if working well) */
 .type-A {
   --back_color: #94c5ba;
 }
+
 /* ////////////// */
 
 .memorableSection {
@@ -417,6 +464,7 @@
   letter-spacing: 2px;
   transition: all 0.3s ease;
 }
+
 .runningButton:hover{
   color: #172401;
   transition: all 0.3s ease;
