@@ -89,13 +89,20 @@
 /* ////////////// */
 .introSection {
   height: 100vh;
-  text-align: center;
-  padding: 150px 0;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
+
+.introCentered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+
 
 @media (max-width: 768px) {
   .introSection {
@@ -147,21 +154,14 @@
   }
 }
 
-.introHeading {
+.introDescP1 {
   color: #3b4e3f;
   margin-bottom: 30px;
   font-size: 4em;
   line-height: 70px;
 }
 
-@media (max-width: 640px) {
-  .introHeading {
-    font-size: 24px;
-    line-height: 1.4;
-  }
-}
-
-.introSubheading {
+.introDescP2 {
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -171,14 +171,7 @@
   line-height: 70px;
 }
 
-@media (max-width: 640px) {
-  .introSubheading {
-    font-size: 24px;
-    line-height: 1.4;
-  }
-}
-
-.introSubheadingSecond {
+.introDescP3 {
   color: #be9954;
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
@@ -186,8 +179,18 @@
   font-size: 4em;
 }
 
-@media (max-width: 640px) {
-  .introSubheadingSecond {
+@media (max-width: 640px) {  
+  .introDescP1 {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .introDescP2 {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .introDescP3 {
     font-size: 24px;
     line-height: 1.4;
   }
@@ -197,7 +200,7 @@
 
 .experienceSection {
   display: flex;
-  min-height: 75vh;
+  height: 100vh;
 }
 
 @media (max-width: 1024px) {
