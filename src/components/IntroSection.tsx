@@ -1,16 +1,15 @@
 import React from "react";
-import styles from "./Input.Design.module.css";
 import "./ComponentStyles.css"
 
 const IntroSection: React.FC = () => {
   return (
     <section className="introSection">
-      <img src="treeVector.png" alt="Safari icon" className={styles.safariIcon} />
+      <img src="treeVector.png" alt="Safari icon" className="introSectionIcon" />
       <div className="introDesc">
         <span className="introHeading">
           <span className="hotelName">DSP</span> is a wildlife-rich
           <br />
-          private reserve in Udawalawa
+          private reserve in Wipattuwa
           <br />
            area with 4 luxury lodges,
           <br/>

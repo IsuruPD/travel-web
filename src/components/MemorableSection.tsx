@@ -1,41 +1,31 @@
 import React from "react";
-import styles from "./Input.Design.module.css";
+import "./ComponentStyles.css"
 
 const MemorableSection: React.FC = () => {
   return (
-    <section className={styles.memorableSection}>
-      <h2 className={styles.memorableHeading}>
+    <section className="memorableSection">
+      <h2 className="memorableHeading h-[50vh]">
         <span>What makes our safari</span>
         <br />
         <span>experience so memorable and</span>
         <br />
         <span>unique?</span>
       </h2>
-      <div className={styles.memorableContent}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9eb62aca772bee248327340608f7aaf71bffef2"
-          alt="Safari experience"
-          className={styles.memorableImage}
-        />
-        <div className={styles.memorableTextContainer}>
-          <h3 className={styles.memorableTitle}>
-            <span>Experiences to treasure</span>
-            <br />
-            <span>forever.</span>
-          </h3>
-          <p className={styles.memorableDescription}>
-            <span>
-              From intimate game sightings and expert guides to luxurious suites
-              and authentic South
-            </span>
-            <br />
-            <span>
-              African hospitality and fare,Sabi Sabi has perfected the art of
-              indulging your senses.
-            </span>
-          </p>
+      <section className="memorableSection flex ">
+
+      <div className="memorableTextContainer flex-1">
+        <div className="experienceText">
+          <span>Wild Encounters Await</span>
+          <br />
+          <span>Join guided safaris through lush grasslands and thick forests. Capture sights of elephants in their natural habitat, hear the rustle of the jungle, and feel the thrill of the unknown.</span>
         </div>
+      </div>      
+
+      <div className="flex-1">
+        <img src="eagle43.png" alt="Safari experience" className="experienceImage"
+      />
       </div>
+      </section>
     </section>
   );
 };

@@ -1,25 +1,35 @@
 import React from "react";
-import styles from "./Input.Design.module.css";
 
 const ExperienceSection: React.FC = () => {
   return (
-    <section className={styles.experienceSection}>
-      <div className={styles.experienceTextContainer}>
-        <h2 className={styles.experienceText}>
-          <span>An unforgettable safari</span>
-          <br />
-          <span>An unforgettable safari</span>
-          <br />
-          <span>An unforgettable safari</span>
-          <br />
-          <span>An unforgettable safari</span>
-        </h2>
-      </div>
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b0bcb7dd88364fb60daa64f9d564a8b3f5f1907"
-        alt="Safari experience"
-        className={styles.experienceImage}
+    <section className="experienceSection flex ">
+
+      <div className="flex-1">
+        <img src="bird43.png" alt="Safari experience" className="experienceImage"
       />
+      </div>
+      <div className="experienceTextContainer flex-1">
+          <div className="subSectionTitle">Where Luxury Meets Wilderness</div>
+          <br />
+          <div className="subSectionDescription flex-1">
+            Nestled on the edge of <span className="subSectionDescriptionEmp">Udawalawa,</span> our eco-lodges offer the perfect blend of comfort and raw nature. Wake up to the call of exotic birds, and sleep under a sky full of stars.
+          </div>
+
+
+          <div className="">
+            <div className="container">
+              <a href="#" className="runningButton type-A">
+                <div className="runningButton__line"></div>
+                <div className="runningButton__line"></div>
+                <span className="runningButton__text">See more..</span>
+                <div className="runningButton__drow1"></div>
+                <div className="runningButton__drow2"></div>
+              </a>
+            </div>
+
+          </div>
+      </div>
+
     </section>
   );
 };
