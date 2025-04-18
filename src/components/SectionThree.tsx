@@ -1,6 +1,7 @@
 import React from "react";
+import "./ComponentStyles.css"
 
-const ExperienceSection: React.FC = () => {
+const SectionThree: React.FC = () => {
   return (
     <section className="experienceSection">
       <div className="flex-1">
@@ -13,9 +14,11 @@ const ExperienceSection: React.FC = () => {
 
       <div className="experienceTextSec flex-1">
         <div className="experienceTextContainer">
-          <div className="subSectionTitle">Where Luxury Meets Wilderness</div>
-          <div className="subSectionDescription">
-            Nestled on the edge of <span className="subSectionDescriptionEmp">Udawalawa,</span> our eco-lodges offer the perfect blend of comfort and raw nature. Wake up to the call of exotic birds, and sleep under a sky full of stars.
+          <div className="expSubSectionTitle">Where Luxury Meets Wilderness</div>
+          <div className="expSubSectionDescription">
+            Nestled on the edge of <span className="expSubSectionDescriptionEmp">Udawalawa,</span> our eco-lodges offer the 
+            perfect blend of comfort and <span className="expSubSectionDescriptionEmp">raw nature.</span> 
+            Wake up to the call of exotic birds, and sleep under a sky full of stars.
           </div>
 
           <div className="container">
@@ -34,4 +37,4 @@ const ExperienceSection: React.FC = () => {
   );
 };
 
-export default ExperienceSection;
+export default SectionThree;

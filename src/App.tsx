@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import Header from './components/Header';
 import LandingBanner from './components/LandingBanner';
-import ExperienceSection from './components/ExperienceSection';
+import SectionThree from './components/SectionThree';
 import IntroSection from './components/IntroSection';
-import MemorableSection from './components/MemorableSection';
+import SectionFour from './components/SectionFour';
+import SectionFive from './components/SectionFive';
 
 const App: React.FC = () => {
   return (
@@ -11,8 +12,9 @@ const App: React.FC = () => {
       <Header />
       <LandingBanner />
       <IntroSection />
-      <ExperienceSection />
-      <MemorableSection />
+      <SectionThree />
+      <SectionFour />
+      <SectionFive/>
     </main>
   )
 }
