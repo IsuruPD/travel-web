@@ -4,7 +4,7 @@ import "./ComponentStyles.css"
 const SectionThree: React.FC = () => {
   return (
     <section className="sectionThree">
-      <div className="sect3L flex-1">
+      <div className="sect3L">
         <img
           src="bird43.png"
           alt="Safari experience"
@@ -12,7 +12,7 @@ const SectionThree: React.FC = () => {
         />
       </div>
 
-      <div className="sect3R flex-1">
+      <div className="sect3R">
         <div className="sect3RContainer">
           <div className="sect3RTitle">Where Luxury Meets Wilderness</div>
           <div className="sect3RDesc">

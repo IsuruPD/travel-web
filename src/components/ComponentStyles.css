@@ -230,10 +230,14 @@
 .sect3LImg {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+.sect3L,
+.sect3R  {
+  flex: 1;
 }
 
 .sect3R {
-  display: flex;
   background-color: #435447;
 }
 
@@ -277,6 +281,7 @@
 @media (max-width: 1024px) {
   .sectionThree {
     flex-direction: column;
+    height: auto;
   }
 
   .sect3LImg {
@@ -321,16 +326,47 @@
 
 /* ////////////// */
 
-.section4Heading {
+.sectionFour{
+  height: 25vh;
+}
+
+.sect4Centered{
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+
+.sect4Title {  
+  z-index: 10;
   color: #3b4e3f;
-  font-size: 4em;
+  font-size: 3.5em;
   line-height: 70px;
   text-align: center;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
+@media (max-width:1024px){
+  .sect4Title{
+    font-size: 3em;
+    padding-top: 0.5em;
+  }
+}
+
+@media (max-width:768px){
+  .sect4Title {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+
+@media (max-width:640px){
+  .sect4Title {
+    padding-top: 1em;
+    font-size: 1.5em;
+    line-height: 1.4;
+  }
+}
 /* ////////////// */
 
 .secFiveTitle{
@@ -352,15 +388,15 @@
 
 /* ////////////////////////////// */
 
-/* Running button */
+/* Flow button */
 
 .flwBtn {
   position: relative;
   z-index: 0;
-  width: clamp(160px, 40vw, 240px); /* Responsive width */
-  height: clamp(44px, 6vw, 56px);   /* Responsive height */
+  width: clamp(160px, 40vw, 240px); 
+  height: clamp(44px, 6vw, 56px);   
   text-decoration: none;
-  font-size: clamp(1rem, 2vw, 1.4em); /* Responsive font size */
+  font-size: clamp(1rem, 2vw, 1.4em);
   font-weight: bold;
   color: #ffffff;
   letter-spacing: 1px;

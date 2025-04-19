@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <LandingBanner />
       <IntroSection />
       <SectionThree />
-      {/* <SectionFour /> */}
+      <SectionFour />
       {/* <SectionFive/> */}
     </main>
   )
