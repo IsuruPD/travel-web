@@ -23,6 +23,10 @@
   'opsz' 24
 }
 
+body{
+  overflow-x: hidden;
+}
+
 /* //////////// */
 
 .secFive{
