@@ -14,7 +14,7 @@ const App: React.FC = () => {
       <IntroSection />
       <SectionThree />
       <SectionFour />
-      {/* <SectionFive/> */}
+      <SectionFive/>
     </main>
   )
 }
