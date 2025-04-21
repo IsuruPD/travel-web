@@ -3,15 +3,17 @@ import "./ComponentStyles.css"
 
 const SectionFour: React.FC = () => {
   return (
-    <section className="memorableSection">
-      <h2 className="section4Heading h-[25vh]">
-        <span>What makes our safari
-          <br />
-          experience so memorable and
-          <br />
-          unique?
-        </span>
-      </h2>
+    <section className="sectionFour">
+      <div className="sect4Centered">
+        <div className="sect4Title">
+          <span>What makes our safari
+            <br />
+            experience so memorable and
+            <br />
+            unique?
+          </span>
+        </div>
+      </div>
     </section>
   );
 };

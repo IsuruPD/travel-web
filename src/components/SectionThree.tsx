@@ -3,31 +3,31 @@ import "./ComponentStyles.css"
 
 const SectionThree: React.FC = () => {
   return (
-    <section className="experienceSection">
-      <div className="flex-1">
+    <section className="sectionThree">
+      <div className="sect3L">
         <img
           src="bird43.png"
           alt="Safari experience"
-          className="experienceImage"
+          className="sect3LImg"
         />
       </div>
 
-      <div className="experienceTextSec flex-1">
-        <div className="experienceTextContainer">
-          <div className="expSubSectionTitle">Where Luxury Meets Wilderness</div>
-          <div className="expSubSectionDescription">
-            Nestled on the edge of <span className="expSubSectionDescriptionEmp">Udawalawa,</span> our eco-lodges offer the 
-            perfect blend of comfort and <span className="expSubSectionDescriptionEmp">raw nature.</span> 
+      <div className="sect3R">
+        <div className="sect3RContainer">
+          <div className="sect3RTitle">Where Luxury Meets Wilderness</div>
+          <div className="sect3RDesc">
+            Nestled on the edge of <span className="sect3RDescEmp">Wilpattuwa,</span> our eco-lodges offer the 
+            perfect blend of comfort and <span className="sect3RDescEmp">raw nature.</span> 
             Wake up to the call of exotic birds, and sleep under a sky full of stars.
           </div>
 
-          <div className="container">
-            <a href="#" className="runningButton type-A">
-              <div className="runningButton__line"></div>
-              <div className="runningButton__line"></div>
-              <span className="runningButton__text">See more..</span>
-              <div className="runningButton__drow1"></div>
-              <div className="runningButton__drow2"></div>
+          <div className="flwBtnContainer">
+            <a href="#" className="flwBtn type-A">
+              <div className="flwBtn_line"></div>
+              <div className="flwBtn_line"></div>
+              <span className="flwBtn_text">See more..</span>
+              <div className="flwBtn_drow1"></div>
+              <div className="flwBtn_drow2"></div>
             </a>
           </div>
         </div>
