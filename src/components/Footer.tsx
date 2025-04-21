@@ -166,7 +166,7 @@ const Footer = () => {
                   </svg>
                 </a>
               </div>
-              <p className="text-base text-white poetsen-one-regular">
+              <p className="text-base text-white">
                 &copy; {new Date().getFullYear()} DSP Wildlife Hotel
               </p>
             </div>

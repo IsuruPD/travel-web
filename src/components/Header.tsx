@@ -4,7 +4,7 @@ import "./ComponentStyles.css"
 
 const Header: React.FC = () => {
   return (
-      <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.4em] pt-3 pb-3 w-full bg-white/30 backdrop-blur-sm">
+      <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.4em] pt-3.5 pb-3.5 w-full bg-white/30 backdrop-blur-sm">
         <NavbarContent className="hidden sm:flex space-x-8" justify="start">
           <NavbarItem className="whitespace-nowrap">
               <span className="material-symbols-rounded hover:text-white transform transition-all duration-200 hover:cursor-pointer" style={{ fontSize: "2rem" }}>home</span>
