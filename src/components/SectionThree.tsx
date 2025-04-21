@@ -16,7 +16,7 @@ const SectionThree: React.FC = () => {
         <div className="sect3RContainer">
           <div className="sect3RTitle">Where Luxury Meets Wilderness</div>
           <div className="sect3RDesc">
-            Nestled on the edge of <span className="sect3RDescEmp">Udawalawa,</span> our eco-lodges offer the 
+            Nestled on the edge of <span className="sect3RDescEmp">Wilpattuwa,</span> our eco-lodges offer the 
             perfect blend of comfort and <span className="sect3RDescEmp">raw nature.</span> 
             Wake up to the call of exotic birds, and sleep under a sky full of stars.
           </div>
