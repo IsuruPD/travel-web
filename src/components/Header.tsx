@@ -6,24 +6,11 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.4em] pt-3 pb-3 w-full bg-white/30 backdrop-blur-sm">
-      {/* Mobile Menu Button */}
-      <div className="lg:hidden">
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 text-gray-600 hover:text-gray-900"
-        >
-          <span className="material-symbols-rounded" style={{ fontSize: "2rem" }}>
-            {isMenuOpen ? 'close' : 'menu'}
-          </span>
-        </button>
-      </div>
-
-      {/* Desktop Navigation */}
-      <NavbarContent className="hidden lg:flex space-x-8" justify="start">
-        <NavbarItem className="whitespace-nowrap">
-          <span className="material-symbols-rounded hover:text-white transform transition-all duration-200 hover:cursor-pointer" style={{ fontSize: "2rem" }}>home</span>
-        </NavbarItem>
+      <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.4em] pt-3.5 pb-3.5 w-full bg-white/30 backdrop-blur-sm">
+        <NavbarContent className="hidden sm:flex space-x-8" justify="start">
+          <NavbarItem className="whitespace-nowrap">
+              <span className="material-symbols-rounded hover:text-white transform transition-all duration-200 hover:cursor-pointer" style={{ fontSize: "2rem" }}>home</span>
+          </NavbarItem>
 
         <NavbarItem className="whitespace-nowrap hover:text-white transform transition-all duration-200">
           <Link color="foreground" href="#">

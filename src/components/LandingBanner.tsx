@@ -10,7 +10,7 @@ const LandingBanner: React.FC = () => {
       </div>
       <div className="landingText" style={{ textAlign: "center" }}>
         <div className="landingTitle">Escape</div>
-        <div className="landingSubTitle">to our <span className="landingSubTitleSec">world</span></div>
+        <div className="landingSubTitle">to our <span className="landingSubTitleEmp">world</span></div>
       </div>
     </section>
   );

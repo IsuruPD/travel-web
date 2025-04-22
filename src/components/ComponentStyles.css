@@ -20,7 +20,7 @@
   font-family: "Akronim", system-ui;
   font-weight: 400;
   font-style: normal;
-  font-size: 5em;
+  font-size: 4em;
   padding-right: 300px;
   margin: 0;
 }
@@ -29,12 +29,12 @@
   color: #3c580a;
   font-weight: 700;
   font-style: normal;
-  font-size: 5rem;
+  font-size: 4rem;
   padding-left: 300px;
   margin: 0;
 }
 
-.landingSubTitleSec{
+.landingSubTitleEmp{
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -382,7 +382,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 5em;
+  padding-top: 3em;
   padding-bottom: 5em;
 }
 
