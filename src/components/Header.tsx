@@ -3,7 +3,7 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@her
 import "./ComponentStyles.css"
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen] = useState(false);
 
   return (
       <Navbar isBlurred={true} shouldHideOnScroll position="sticky" className="fixed top-0 left-0 z-50 text-[1.4em] pt-3.5 pb-3.5 w-full bg-white/30 backdrop-blur-sm">
