@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Header from './components/Header';
 import LandingBanner from './components/LandingBanner';
 import SectionThree from './components/SectionThree';
