@@ -404,8 +404,21 @@
   display: flex;
 }
 
-/* ////////////////////////////// */
+/* ////////////// */
 
+.HotelAmenitiesSection{
+  height: 100vh;
+}
+
+/* ////////////// */
+
+.GallerySection{
+  height: 100vh;
+}
+
+/* ////////////// */
+
+/* ////////////////////////////// */
 /* Flow button */
 
 .flwBtn {
