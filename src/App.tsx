@@ -6,6 +6,8 @@ import SafariTitleS4 from './components/SafariTitleSection';
 import ExperienceS5 from './components/ExperienceSection';
 import Footer from './components/Footer'
 import WildlifeS6 from './components/WildlifeSection';
+import GallerySection from './components/GallerySection'
+import HotelAmnetiesSection from './components/HotelAmenitiesSection';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +18,8 @@ const App: React.FC = () => {
       <DescriptionS3 />
       <SafariTitleS4 />
       <ExperienceS5/>
-      <WildlifeS6/>
+      <HotelAmnetiesSection/>
+      <GallerySection/>
       <Footer/>
     </main>
   )
