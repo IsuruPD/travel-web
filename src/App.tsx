@@ -18,6 +18,7 @@ const App: React.FC = () => {
       <DescriptionS3 />
       <SafariTitleS4 />
       <ExperienceS5/>
+      <WildlifeS6/>
       <HotelAmnetiesSection/>
       <GallerySection/>
       <Footer/>

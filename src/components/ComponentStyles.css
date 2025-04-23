@@ -697,6 +697,25 @@
   transform: rotate(90deg);
 }
 
+/* Hotel Amenities Section Styles */
+.room-card {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.room-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow Button Styles */
+.fas.fa-chevron-left,
+.fas.fa-chevron-right {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* 
 https://www.youtube.com/watch?v=d34GsFz-HkY&ab_channel=iEatWebsites
 https://uiverse.io/gharsh11032000/fuzzy-robin-67
