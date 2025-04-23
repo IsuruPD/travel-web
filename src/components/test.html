@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildhaven Retreat | Luxury Nature Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-dark: #1a3a32;
+            --forest-medium: #2d5548;
+            --forest-light: #5a8777;
+            --moss: #8a9b6e;
+            --cream: #f5f0e6;
+            --bronze: #c68c53;
+            --stone: #d8d5cd;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--forest-dark);
+            background-color: var(--cream);
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px var(--cream);
+            color: transparent;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            will-change: transform;
+        }
+        
+        .testimonial-card {
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .room-card {
+            transition: all 0.3s ease;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--bronze);
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--bronze);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease-out;
+        }
+        
+        .animate-text {
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .delay-1 {
+            animation-delay: 0.5s;
+        }
+        
+        .delay-2 {
+            animation-delay: 1s;
+        }
+        
+        .delay-3 {
+            animation-delay: 1.5s;
+        }
+        
+        .leaf {
+            position: absolute;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%238a9b6e"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(198, 140, 83, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(198, 140, 83, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(198, 140, 83, 0);
+            }
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Floating Leaves -->
+    <div id="leaves-container"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-cream">
+                    <span class="text-cream">Wildhaven</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#experience" class="text-cream hover:text-bronze transition">Experience</a>
+                    <a href="#accommodations" class="text-cream hover:text-bronze transition">Rooms</a>
+                    <a href="#gallery" class="text-cream hover:text-bronze transition">Gallery</a>
+                    <a href="#testimonials" class="text-cream hover:text-bronze transition">Stories</a>
+                    <a href="#contact" class="text-cream hover:text-bronze transition">Contact</a>
+                </div>
+                <button class="md:hidden text-cream focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-forest-dark bg-opacity-95 z-40 flex items-center justify-center hidden" id="mobile-menu">
+        <div class="text-center">
+            <a href="#experience" class="block text-cream text-2xl py-4 hover:text-bronze transition">Experience</a>
+            <a href="#accommodations" class="block text-cream text-2xl py-4 hover:text-bronze transition">Rooms</a>
+            <a href="#gallery" class="block text-cream text-2xl py-4 hover:text-bronze transition">Gallery</a>
+            <a href="#testimonials" class="block text-cream text-2xl py-4 hover:text-bronze transition">Stories</a>
+            <a href="#contact" class="block text-cream text-2xl py-4 hover:text-bronze transition">Contact</a>
+            <button class="absolute top-6 right-6 text-cream text-2xl focus:outline-none" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40"></div>
+        <div class="container mx-auto px-6 z-10 text-center">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-cream mb-6 animate-text">
+                <span class="block">Wildhaven</span>
+                <span class="text-xl md:text-3xl font-light tracking-widest animate-text delay-1">LUXURY NATURE RETREAT</span>
+            </h1>
+            <p class="text-lg md:text-xl text-cream max-w-2xl mx-auto mb-10 animate-text delay-2">
+                Where wilderness whispers and luxury listens
+            </p>
+            <a href="#booking" class="inline-block bg-bronze hover:bg-forest-light text-cream px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 animate-text delay-3">
+                Discover Your Escape
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 text-center">
+            <a href="#experience" class="inline-block text-cream animate-bounce">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-forest-dark mb-4">The Wildhaven Experience</h2>
+                <div class="w-24 h-1 bg-bronze mx-auto mb-6"></div>
+                <p class="text-lg text-forest-medium max-w-3xl mx-auto">
+                    Immerse yourself in nature's embrace while enjoying world-class amenities and personalized service.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Experience Card 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-bronze flex items-center justify-center text-cream mr-3">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-forest-dark">Forest Immersion</h3>
+                        </div>
+                        <p class="text-forest-medium mb-4">
+                            Private guided hikes through ancient forests, wildlife spotting, and sunrise meditation platforms.
+                        </p>
+                        <a href="#" class="text-bronze font-medium hover:underline">Explore activities</a>
+                    </div>
+                </div>
+                
+                <!-- Experience Card 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-bronze flex items-center justify-center text-cream mr-3">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-forest-dark">Wilderness Spa</h3>
+                        </div>
+                        <p class="text-forest-medium mb-4">
+                            Treatments using locally foraged botanicals in our treetop treatment rooms overlooking the valley.
+                        </p>
+                        <a href="#" class="text-bronze font-medium hover:underline">View treatments</a>
+                    </div>
+                </div>
+                
+                <!-- Experience Card 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-bronze flex items-center justify-center text-cream mr-3">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-forest-dark">Foraged Cuisine</h3>
+                        </div>
+                        <p class="text-forest-medium mb-4">
+                            Michelin-starred dining with ingredients harvested from our forests, gardens, and local waters.
+                        </p>
+                        <a href="#" class="text-bronze font-medium hover:underline">See sample menus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Parallax Divider -->
+    <section class="relative h-64 md:h-96 overflow-hidden">
+        <div class="parallax-layer absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');" data-speed="0.3"></div>
+        <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <h2 class="text-4xl md:text-6xl text-cream font-bold text-center px-6">"In every walk with nature, one receives far more than he seeks"</h2>
+        </div>
+    </section>
+    
+    <!-- Accommodations Section -->
+    <section id="accommodations" class="py-20 bg-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-forest-dark mb-4">Our Sanctuaries</h2>
+                <div class="w-24 h-1 bg-bronze mx-auto mb-6"></div>
+                <p class="text-lg text-forest-medium max-w-3xl mx-auto">
+                    Each retreat is a masterpiece of sustainable luxury, designed to bring you closer to nature without sacrificing comfort.
+                </p>
+            </div>
+            
+            <div class="flex mb-8 justify-center">
+                <button class="room-filter px-4 py-2 mx-2 rounded-full bg-forest-dark text-cream" data-filter="all">All</button>
+                <button class="room-filter px-4 py-2 mx-2 rounded-full bg-stone hover:bg-forest-light hover:text-cream transition" data-filter="treehouse">Treehouses</button>
+                <button class="room-filter px-4 py-2 mx-2 rounded-full bg-stone hover:bg-forest-light hover:text-cream transition" data-filter="lakeside">Lakeside</button>
+                <button class="room-filter px-4 py-2 mx-2 rounded-full bg-stone hover:bg-forest-light hover:text-cream transition" data-filter="cliff">Cliffside</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="rooms-container">
+                <!-- Room 1 -->
+                <div class="room-card rounded-xl overflow-hidden shadow-lg bg-white" data-category="treehouse">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Canopy Suite" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-xl font-bold text-cream">Canopy Suite</h3>
+                            <p class="text-bronze">From $890/night</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-forest-medium mb-4">
+                            Elevated among ancient oaks, our signature treehouse features 360° forest views, a suspended net lounge, and outdoor copper tub.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-user-friends text-bronze mr-1"></i>
+                                <span class="text-forest-medium">2 guests</span>
+                            </div>
+                            <a href="#" class="text-bronze font-medium hover:underline">View details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card rounded-xl overflow-hidden shadow-lg bg-white" data-category="lakeside">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lakeview Villa" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-xl font-bold text-cream">Lakeview Villa</h3>
+                            <p class="text-bronze">From $1,250/night</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-forest-medium mb-4">
+                            Private dock, floor-to-ceiling windows, and a floating bedroom that extends over the water's edge for an immersive experience.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-user-friends text-bronze mr-1"></i>
+                                <span class="text-forest-medium">4 guests</span>
+                            </div>
+                            <a href="#" class="text-bronze font-medium hover:underline">View details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card rounded-xl overflow-hidden shadow-lg bg-white" data-category="cliff">
+                    <div class="relative h-64">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cliffside Retreat" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-xl font-bold text-cream">Cliffside Retreat</h3>
+                            <p class="text-bronze">From $1,750/night</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-forest-medium mb-4">
+                            Perched on granite cliffs with panoramic valley views, featuring an infinity pool that merges with the horizon.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-user-friends text-bronze mr-1"></i>
+                                <span class="text-forest-medium">2 guests</span>
+                            </div>
+                            <a href="#" class="text-bronze font-medium hover:underline">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#booking" class="inline-block bg-forest-dark hover:bg-forest-light text-cream px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105">
+                    Check Availability
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-stone">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-forest-dark mb-4">Moments at Wildhaven</h2>
+                <div class="w-24 h-1 bg-bronze mx-auto mb-6"></div>
+                <p class="text-lg text-forest-medium max-w-3xl mx-auto">
+                    A visual journey through the landscapes, wildlife, and luxurious details that define our retreat.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Forest Path" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1530488562579-7c1dd2e6667b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sunset" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Deer" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Spa" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lake" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cliffside" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dining" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item overflow-hidden rounded-lg cursor-pointer transform transition duration-500 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lakeside" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-search text-cream text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-forest-dark mb-4">Guest Stories</h2>
+                <div class="w-24 h-1 bg-bronze mx-auto mb-6"></div>
+                <p class="text-lg text-forest-medium max-w-3xl mx-auto">
+                    Hear from those who have experienced the magic of Wildhaven.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-cover bg-center mr-4" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div>
+                            <h4 class="font-bold text-forest-dark">Sarah K.</h4>
+                            <p class="text-bronze">New York</p>
+                        </div>
+                    </div>
+                    <p class="text-forest-medium italic mb-6">
+                        "Waking up to birdsong in our treehouse, then watching the mist rise over the valley from our private deck... I've never felt so connected to nature while still enjoying every luxury imaginable."
+                    </p>
+                    <div class="flex text-bronze">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-cover bg-center mr-4" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                        <div>
+                            <h4 class="font-bold text-forest-dark">Michael T.</h4>
+                            <p class="text-bronze">London</p>
+                        </div>
+                    </div>
+                    <p class="text-forest-medium italic mb-6">
+                        "The attention to detail is extraordinary - from the handcrafted furniture to the locally foraged ingredients in every meal. This isn't just a hotel, it's a complete immersion into sustainable luxury."
+                    </p>
+                    <div class="flex text-bronze">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-cover bg-center mr-4" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                        <div>
+                            <h4 class="font-bold text-forest-dark">Aisha R.</h4>
+                            <p class="text-bronze">Dubai</p>
+                        </div>
+                    </div>
+                    <p class="text-forest-medium italic mb-6">
+                        "Our cliffside retreat was breathtaking. Falling asleep to the sound of waves below and waking to eagles soaring past our windows - it was the digital detox we desperately needed."
+                    </p>
+                    <div class="flex text-bronze">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-forest-dark text-cream">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto glass-card rounded-xl p-8 md:p-12 shadow-xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Begin Your Journey</h2>
+                    <div class="w-24 h-1 bg-bronze mx-auto mb-6"></div>
+                    <p class="text-lg max-w-2xl mx-auto">
+                        Complete the form below and our retreat specialists will craft your perfect Wildhaven experience.
+                    </p>
+                </div>
+                
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="check-in" class="block mb-2">Check-in</label>
+                        <input type="date" id="check-in" class="w-full px-4 py-3 rounded-lg bg-cream/10 border border-cream/20 focus:outline-none focus:ring-2 focus:ring-bronze">
+                    </div>
+                    
+                    <div>
+                        <label for="check-out" class="block mb-2">Check-out</label>
+                        <input type="date" id="check-out" class="w-full px-4 py-3 rounded-lg bg-cream/10 border border-cream/20 focus:outline-none focus:ring-2 focus:ring-bronze">
+                    </div>
+                    
+                    <div>
+                        <label for="guests" class="block mb-2">Guests</label>
+                        <select id="guests" class="w-full px-4 py-3 rounded-lg bg-cream/10 border border-cream/20 focus:outline-none focus:ring-2 focus:ring-bronze">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="room-type" class="block mb-2">Retreat Type</label>
+                        <select id="room-type" class="w-full px-4 py-3 rounded-lg bg-cream/10 border border-cream/20 focus:outline-none focus:ring-2 focus:ring-bronze">
+                            <option>Treehouse</option>
+                            <option>Lakeside Villa</option>
+                            <option>Cliffside Retreat</option>
+                            <option>Not sure yet</option>
+                        </select>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label for="special-requests" class="block mb-2">Special Requests</label>
+                        <textarea id="special-requests" rows="3" class="w-full px-4 py-3 rounded-lg bg-cream/10 border border-cream/20 focus:outline-none focus:ring-2 focus:ring-bronze"></textarea>
+                    </div>
+                    
+                    <div class="md:col-span-2 text-center mt-6">
+                        <button type="submit" class="bg-bronze hover:bg-forest-light text-cream px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 pulse">
+                            Check Availability
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-forest-dark text-cream pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Wildhaven</h3>
+                    <p class="mb-4">
+                        A luxury wilderness retreat dedicated to sustainable tourism and immersive nature experiences.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-cream hover:text-bronze transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-cream hover:text-bronze transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-cream hover:text-bronze transition"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Contact</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-bronze mt-1 mr-3"></i>
+                            <p>Forest Ridge Road,<br>Wilderness Reserve,<br>BC V0N 1B0, Canada</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-bronze mr-3"></i>
+                            <p>+1 250 555 0199</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-bronze mr-3"></i>
+                            <p>welcome@wildhaven.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Newsletter</h3>
+                    <p class="mb-4">Subscribe for seasonal offers and wilderness inspiration.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 rounded-l-lg bg-cream/10 border border-cream/20 focus:outline-none w-full">
+                        <button type="submit" class="bg-bronze hover:bg-forest-light px-4 py-3 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-cream/20 pt-8 text-center">
+                <p>&copy; 2023 Wildhaven Retreat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Lightbox Modal -->
+    <div class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden" id="lightbox">
+        <div class="relative w-full max-w-6xl">
+            <img src="" alt="" id="lightbox-img" class="max-h-[90vh] mx-auto">
+            <button id="close-lightbox" class="absolute top-4 right-4 text-cream text-3xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        // Hover effects for cursor
+        const hoverElements = document.querySelectorAll('a, button, .gallery-item, .room-card, .testimonial-card');
+        
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+        
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-forest-dark', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-forest-dark', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+        
+        // Room Filtering
+        const roomFilters = document.querySelectorAll('.room-filter');
+        const rooms = document.querySelectorAll('.room-card');
+        
+        roomFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                // Update active button
+                roomFilters.forEach(f => f.classList.remove('bg-forest-dark', 'text-cream'));
+                roomFilters.forEach(f => f.classList.add('bg-stone', 'hover:bg-forest-light', 'hover:text-cream'));
+                filter.classList.add('bg-forest-dark', 'text-cream');
+                filter.classList.remove('bg-stone', 'hover:bg-forest-light', 'hover:text-cream');
+                
+                const category = filter.getAttribute('data-filter');
+                
+                rooms.forEach(room => {
+                    if (category === 'all' || room.getAttribute('data-category') === category) {
+                        room.style.display = 'block';
+                    } else {
+                        room.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeLightbox = document.getElementById('close-lightbox');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').getAttribute('src');
+                lightboxImg.setAttribute('src', imgSrc);
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        
+        // Create floating leaves
+        function createLeaves() {
+            const leavesContainer = document.getElementById('leaves-container');
+            
+            for (let i = 0; i < 15; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                
+                // Random properties
+                const size = Math.random() * 20 + 10;
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                const rotation = Math.random() * 360;
+                
+                leaf.style.width = `${size}px`;
+                leaf.style.height = `${size}px`;
+                leaf.style.left = `${posX}px`;
+                leaf.style.top = `${posY}px`;
+                leaf.style.animationDelay = `${delay}s`;
+                leaf.style.animationDuration = `${duration}s`;
+                leaf.style.transform = `rotate(${rotation}deg)`;
+                
+                leavesContainer.appendChild(leaf);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createLeaves();
+            
+            // Simple parallax effect
+            const parallaxLayers = document.querySelectorAll('.parallax-layer');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                
+                parallaxLayers.forEach(layer => {
+                    const speed = parseFloat(layer.getAttribute('data-speed'));
+                    const yPos = -(scrollPosition * speed);
+                    layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
