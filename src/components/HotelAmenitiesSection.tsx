@@ -14,7 +14,7 @@ interface Room {
 const roomData: Room[] = [
   {
     id: "1",
-    name: "Canopy Villa",
+    name: "Canopy Villa R1",
     price: 890,
     category: "treehouse",
     image: "https://images.unsplash.com/photo-1622968422538-efb01b75d5e8?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -23,7 +23,7 @@ const roomData: Room[] = [
   },
   {
     id: "2",
-    name: "Lakeview Suite",
+    name: "Lakeview Suite R2",
     price: 1250,
     category: "lakeside",
     image: "https://images.unsplash.com/photo-1564013434775-f71db0030976?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -32,7 +32,7 @@ const roomData: Room[] = [
   },
   {
     id: "3",
-    name: "Cliffside Cabanas",
+    name: "Cliffside Cabanas R3",
     price: 1750,
     category: "cliff",
     image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -41,7 +41,7 @@ const roomData: Room[] = [
   },
   {
     id: "4",
-    name: "Cliffside Cabanas",
+    name: "Mountain Retreat R4",
     price: 1750,
     category: "cliff",
     image: "https://images.unsplash.com/photo-1724113390415-8dae6abe106c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -50,7 +50,7 @@ const roomData: Room[] = [
   },
   {
     id: "5",
-    name: "Cliffside Cabanas",
+    name: "Forest Haven R5",
     price: 1750,
     category: "cliff",
     image: "https://images.unsplash.com/photo-1643769577225-ed42858e5577?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -59,70 +59,67 @@ const roomData: Room[] = [
   }
 ];
 
-const HotelAmenetiesSection: React.FC = () => {
+const HotelAmenitiesSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredRooms, setFilteredRooms] = useState<Room[]>(roomData);
-  const [visibleRooms, setVisibleRooms] = useState<Room[]>([]);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
 
+  // Update filtered rooms when filter changes
   useEffect(() => {
     setFilteredRooms(
       activeFilter === "all"
         ? roomData
         : roomData.filter((room) => room.category === activeFilter)
     );
+    setCurrentIndex(0);
   }, [activeFilter]);
 
-  useEffect(() => {
-    // Initialize visible rooms when filtered rooms change
-    if (filteredRooms.length > 0) {
-      setVisibleRooms(filteredRooms.slice(0, Math.min(3, filteredRooms.length)));
-    } else {
-      setVisibleRooms([]);
+  // Calculate cards per view based on screen size
+  const cardsPerView = 3;
+
+  // Improved next slide function with proper looping
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + cardsPerView;
+      // If next index would be past the end, loop back to 0
+      return nextIndex >= filteredRooms.length ? 0 : nextIndex;
+    });
+  };
+
+  // Improved prev slide function with proper looping
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const totalGroups = Math.ceil(filteredRooms.length / cardsPerView);
+      const lastGroupStart = (totalGroups - 1) * cardsPerView;
+      
+      if (prevIndex === 0) {
+        // If we're at the start, go to the last group
+        return lastGroupStart;
+      } else {
+        // Otherwise go back by the number of cards per view
+        return Math.max(0, prevIndex - cardsPerView);
+      }
+    });
+  };
+
+  // Calculate the rooms to display with wrap-around logic
+  const getVisibleRooms = () => {
+    // If we have fewer rooms than cards per view, just show them all
+    if (filteredRooms.length <= cardsPerView) {
+      return filteredRooms;
     }
-  }, [filteredRooms]);
-
-  const nextCard = () => {
-    if (isAnimating || filteredRooms.length <= 3) return;
     
-    setIsAnimating(true);
-    setSlideDirection('right');
-
-    // Get the next card that should enter
-    const firstVisibleIndex = filteredRooms.findIndex(room => room.id === visibleRooms[0].id);
-    const nextIndex = (firstVisibleIndex - 1 + filteredRooms.length) % filteredRooms.length;
-    const nextCard = filteredRooms[nextIndex];
-
-    // Create new array with the next card at the beginning and remove the last card
-    const newVisibleRooms = [nextCard, ...visibleRooms.slice(0, -1)];
+    // Otherwise, get the slice of rooms to display
+    const end = currentIndex + cardsPerView;
+    if (end <= filteredRooms.length) {
+      return filteredRooms.slice(currentIndex, end);
+    }
     
-    setTimeout(() => {
-      setVisibleRooms(newVisibleRooms);
-      setIsAnimating(false);
-    }, 300);
+    // Handle wrap-around case if needed
+    return [...filteredRooms.slice(currentIndex), ...filteredRooms.slice(0, end - filteredRooms.length)];
   };
 
-  const prevCard = () => {
-    if (isAnimating || filteredRooms.length <= 3) return;
-    
-    setIsAnimating(true);
-    setSlideDirection('left');
-
-    // Get the last visible card index
-    const lastVisibleIndex = filteredRooms.findIndex(room => room.id === visibleRooms[visibleRooms.length - 1].id);
-    // Get the next card that should enter
-    const nextIndex = (lastVisibleIndex + 1) % filteredRooms.length;
-    const nextCard = filteredRooms[nextIndex];
-
-    // Create new array with the new card at the end and remove the first card
-    const newVisibleRooms = [...visibleRooms.slice(1), nextCard];
-    
-    setTimeout(() => {
-      setVisibleRooms(newVisibleRooms);
-      setIsAnimating(false);
-    }, 300);
-  };
+  const visibleRooms = getVisibleRooms();
 
   return (
     <section id="accommodations" className="py-20 HotelAmenitiesSection">
@@ -151,7 +148,6 @@ const HotelAmenetiesSection: React.FC = () => {
                 ? "Lakeside"
                 : "Cliffside"}
               
-              {/* For active and hover states */}
               <span className={`absolute left-1/2 bottom-0 h-[2px] transition-all duration-300 -translate-x-1/2
                 ${activeFilter === filter ? 'w-full bg-green-900' : 'w-0 group-hover:w-full bg-[#45752a]'}`}>
               </span>
@@ -162,91 +158,82 @@ const HotelAmenetiesSection: React.FC = () => {
         <div className="relative min-h-[400px]">
           {filteredRooms.length > 0 ? (
             <>
-              {filteredRooms.length > 3 && (
+              {filteredRooms.length > cardsPerView && (
                 <button
-                  onClick={prevCard}
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-10 z-20 
-                    bg-white/40 backdrop-blur-xs hover:bg-white
+                  onClick={prevSlide}
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-6 z-10 
+                    bg-white/40 backdrop-blur-sm hover:bg-white
                     p-4 rounded-full shadow-lg
                     transition-all duration-300 ease-in-out
                     hover:scale-110 hover:shadow-xl
                     group"
-                  aria-label="Previous room"
+                  aria-label="Previous rooms"
                 >
                   <ArrowLeft className="h-6 w-6 text-forest-dark group-hover:text-bronze transition-colors duration-300" />
                 </button>
               )}
 
-              <div className="relative overflow-hidden">
-                <div 
-                  className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-transform duration-300 ease-in-out
-                    ${isAnimating && slideDirection === 'right' ? 'transform translate-x-8' : ''}
-                    ${isAnimating && slideDirection === 'left' ? 'transform -translate-x-8' : ''}`}
-                >
-                  {visibleRooms.map((room) => (
-                    <div
-                      key={room.id}
-                      className={`room-card rounded-xl overflow-hidden shadow-lg bg-white transform transition-all duration-300 hover:scale-[1.02]
-                        ${isAnimating && slideDirection === 'right' && room.id === visibleRooms[0].id ? 'opacity-0 scale-95' : ''}
-                        ${isAnimating && slideDirection === 'left' && room.id === visibleRooms[visibleRooms.length - 1].id ? 'opacity-0 scale-95' : ''}`}
-                    >
-                      <div className="relative h-64">
-                        <img
-                          src={room.image}
-                          alt={room.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent pl-5 pb-3">
-                          <h3 className="text-xl font-bold text-white">{room.name}</h3>
-                          <p className="text-white">From ${room.price}/night</p>
-                        </div>
-                      </div>
-                      
-                      <div className="p-5">
-                        <div className="relative"></div>
-                        <p className="text-base min-h-20 max-h-20 overflow-hidden">
-                          {room.description.length > 120 
-                            ? `${room.description.substring(0, 100)}...`
-                            : room.description
-                          }
-                          {room.description.length > 120 && (
-                            <button 
-                              className="text-bronze hover:underline ml-1 focus:outline-none"
-                            >
-                              see more
-                            </button>
-                          )}
-                        </p>
-                      </div>
-                      <div className="flex justify-between items-center pb-6 pl-6 pr-6">
-                        <div className="flex items-center">
-                          <i className="fas fa-user-friends text-bronze mr-1"></i>
-                          <span className="text-base">
-                            {room.capacity} guest{room.capacity !== 1 ? 's' : ''}
-                          </span>
-                        </div>
-                        <a
-                          href="#"
-                          className="text-bronze font-medium hover:underline transition-all duration-300"
-                        >
-                          View details
-                        </a>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
+                {visibleRooms.map((room) => (
+                  <div
+                    key={room.id}
+                    className="room-card rounded-xl overflow-hidden shadow-lg bg-white transform transition-all duration-300 hover:scale-[1.02]"
+                  >
+                    <div className="relative h-64">
+                      <img
+                        src={room.image}
+                        alt={room.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent pl-5 pb-3">
+                        <h3 className="text-xl font-bold text-white">{room.name}</h3>
+                        <p className="text-white">From ${room.price}/night</p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                    
+                    <div className="p-5">
+                      <p className="text-base min-h-20 max-h-20 overflow-hidden">
+                        {room.description.length > 120 
+                          ? `${room.description.substring(0, 100)}...`
+                          : room.description
+                        }
+                        {room.description.length > 120 && (
+                          <button 
+                            className="text-bronze hover:underline ml-1 focus:outline-none"
+                          >
+                            see more
+                          </button>
+                        )}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center pb-6 pl-6 pr-6">
+                      <div className="flex items-center">
+                        <i className="fas fa-user-friends text-bronze mr-1"></i>
+                        <span className="text-base">
+                          {room.capacity} guest{room.capacity !== 1 ? 's' : ''}
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="text-bronze font-medium hover:underline transition-all duration-300"
+                      >
+                        View details
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {filteredRooms.length > 3 && (
+              {filteredRooms.length > cardsPerView && (
                 <button
-                  onClick={nextCard}
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-9 z-20 
-                    bg-white/40 backdrop-blur-xs hover:bg-white
+                  onClick={nextSlide}
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-6 z-10 
+                    bg-white/40 backdrop-blur-sm hover:bg-white
                     p-4 rounded-full shadow-lg
                     transition-all duration-300 ease-in-out
                     hover:scale-110 hover:shadow-xl
                     group"
-                  aria-label="Next room"
+                  aria-label="Next rooms"
                 >
                   <ArrowRight className="h-6 w-6 text-forest-dark group-hover:text-bronze transition-colors duration-300" />
                 </button>
@@ -279,4 +266,4 @@ const HotelAmenetiesSection: React.FC = () => {
   );
 };
 
-export default HotelAmenetiesSection;
+export default HotelAmenitiesSection;
