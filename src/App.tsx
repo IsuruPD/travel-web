@@ -70,7 +70,7 @@ const App: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <img 
-              src="/treeVector.png" 
+              src="/elephantHd.png" 
               alt="DSP Hotel Logo" 
               className="w-24 h-24 mb-4"
             />

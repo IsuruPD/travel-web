@@ -1,3 +1,6 @@
+/* ////////////// */
+/* Landing Page Section */
+
 .landingImage {
   object-fit: cover;
   width: 100%;
@@ -48,8 +51,8 @@
   text-align: center;
   font-size: 48px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 20%;
+  left: 20%;
   transform: translate(-50%, -50%);
 }
 
